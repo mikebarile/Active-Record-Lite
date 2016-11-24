@@ -17,10 +17,10 @@ The SQL objects implemented in AR Lite are very similar to the Active Record obj
 - ::columns - returns SQL object class's columns
 - ::table_name - returns SQL object class's table name
 - ::table_name=(table_name) - renames SQL object's table name
-- :save - saves SQL object to database
-- :attributes - lists SQL object's attributes
-- :attribute_values - lists SQL object's attribute values
-- :update - Updates SQL object's attributes
+- #save - saves SQL object to database
+- #attributes - lists SQL object's attributes
+- #attribute_values - lists SQL object's attribute values
+- #update - Updates SQL object's attributes
 
 Many of these methods rely on DBConnection (found in db_connection.rb) to interact with the database. An example is the update method:
 ```
@@ -41,7 +41,7 @@ end
 ```
 
 #### "Where" Searches
-In addition, I've added a separate "Searchable" module to enable "where" searches across SQL object classes. The code for this module can be found below:
+In addition, I've added a separate "Searchable" module to enable ::where searches across SQL object classes. The code for this module can be found below:
 ```
 module Searchable
   def where(params)
