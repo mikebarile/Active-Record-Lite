@@ -3,24 +3,24 @@
 ## Description
 
 The goal of this project was to develop a simplified, lightweight version of the Rails library gem Active Record. I built Active Record Lite from the ground up using metaprogramming techniques and adding key functionality from the original gem. These functionalities include:
--SQL objects
--"Where" searches
--Object relationships
+- SQL objects
+- "Where" searches
+- Object relationships
 
 ## Implementation Details
 
 #### SQL Objects
 
 The SQL objects implemented in AR Lite are very similar to the Active Record objects implemented in Active Record. They include the following methods:
--::all - returns all instances of SQL object class
--::find(id) - returns instance of SQL object class with provided id
--::columns - returns SQL object class's columns
--::table_name - returns SQL object class's table name
--::table_name=(table_name) - renames SQL object's table name
--:save - saves SQL object to database
--:attributes - lists SQL object's attributes
--:attribute_values - lists SQL object's attribute values
--:update - Updates SQL object's attributes
+- ::all - returns all instances of SQL object class
+- ::find(id) - returns instance of SQL object class with provided id
+- ::columns - returns SQL object class's columns
+- ::table_name - returns SQL object class's table name
+- ::table_name=(table_name) - renames SQL object's table name
+- :save - saves SQL object to database
+- :attributes - lists SQL object's attributes
+- :attribute_values - lists SQL object's attribute values
+- :update - Updates SQL object's attributes
 
 Many of these methods rely on DBConnection (found in db_connection.rb) to interact with the database. An example is the update method:
 ```
