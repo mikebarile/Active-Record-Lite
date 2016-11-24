@@ -38,12 +38,6 @@ class SQLObject
     parse_all(results)
   end
 
-  def self.parse_all(results)
-    results.map do |result|
-      new(result)
-    end
-  end
-
   def self.find(id)
     results = DBConnection.execute(<<-SQL)
       SELECT *
@@ -70,20 +64,6 @@ class SQLObject
     self.class.columns.map{|col| send(col)}
   end
 
-  def insert
-    col_names = self.class.columns.join(", ")
-    question_marks = (['?'] * self.class.columns.length).join(", ")
-
-    DBConnection.execute(<<-SQL, *attribute_values)
-    INSERT INTO
-      #{self.class.table_name} (#{col_names})
-    VALUES
-      (#{question_marks})
-    SQL
-
-    send("#{:id}=", DBConnection.last_insert_row_id)
-  end
-
   def update
     set = self.class.columns.map{ |col| "#{col} = ?"}.join(", ")
 
@@ -101,5 +81,27 @@ class SQLObject
 
   def save
     id ? update : insert
+  end
+
+  protected
+
+  def self.parse_all(results)
+    results.map do |result|
+      new(result)
+    end
+  end
+
+  def insert
+    col_names = self.class.columns.join(", ")
+    question_marks = (['?'] * self.class.columns.length).join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values)
+    INSERT INTO
+      #{self.class.table_name} (#{col_names})
+    VALUES
+      (#{question_marks})
+    SQL
+
+    send("#{:id}=", DBConnection.last_insert_row_id)
   end
 end
