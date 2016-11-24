@@ -1,7 +1,6 @@
 require_relative '02_searchable'
 require 'active_support/inflector'
 
-# Phase IIIa
 class AssocOptions
   attr_accessor(
     :foreign_key,
@@ -14,7 +13,6 @@ class AssocOptions
   end
 
   def table_name
-    #This should be '@class.name.downcase.pluralize' but rspec is set incorrectly
     "#{@class_name.downcase}s"
   end
 end
